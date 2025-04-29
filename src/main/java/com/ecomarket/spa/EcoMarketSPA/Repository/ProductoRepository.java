@@ -77,7 +77,7 @@ public class ProductoRepository {
         for (int i = 0; i < listaProductos.size(); i++) {
             if (listaProductos.get(i).getId() == prod.getId()) {
                 id = prod.getId();
-                idPosicion = 1;
+                idPosicion = i;
             }
         }
         Producto producto1 = new Producto();
