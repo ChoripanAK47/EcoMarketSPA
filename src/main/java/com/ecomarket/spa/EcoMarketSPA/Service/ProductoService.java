@@ -38,5 +38,8 @@ public class ProductoService {
         return "Producto Eliminado";
     }
 
+    public int totalProductos1() {
+        return productoRepository.totalProductos();
+    }
     
 }
