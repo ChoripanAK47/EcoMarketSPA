@@ -1,4 +1,4 @@
-package com.ecomarket.spa.EcoMarketSPA.Model;
+package com.ecomarket.spa.EcoMarketSPA.Producto.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

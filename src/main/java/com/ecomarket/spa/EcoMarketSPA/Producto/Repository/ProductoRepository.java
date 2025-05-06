@@ -1,10 +1,11 @@
-package com.ecomarket.spa.EcoMarketSPA.Repository;
+package com.ecomarket.spa.EcoMarketSPA.Producto.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import com.ecomarket.spa.EcoMarketSPA.Model.Producto;
+
+import com.ecomarket.spa.EcoMarketSPA.Producto.Model.Producto;
 
 @Repository
 public class ProductoRepository {
@@ -13,6 +14,9 @@ public class ProductoRepository {
     //Crear Objetos y agregarlos a la lista
     public ProductoRepository() {
         listaProductos.add(new Producto(1, "Carne de Soya", "SoyaCat", "Carne de soya de suprema calidad", "Vegano", 3000, 50, "duoc.cl"));
+        listaProductos.add(new Producto(2, "Galletas de Soya", "Gran Soyazo", "Galletas golazo de soya", "Vegano", 2000, 25, "duoc.cl"));
+        listaProductos.add(new Producto(3, "Leche de Soya", "SoyaCat", "Leche de soya de suprema calidad", "Vegano", 1500, 100, "duoc.cl"));
+        listaProductos.add(new Producto(4, "Carne de Res", "ResCat", "Carne de res de suprema calidad", "Carnivoro", 5000, 50, "duoc.cl"));
     }
     //Retornar productos en la lista
     public List<Producto> obtenerProductos() {
@@ -92,5 +96,14 @@ public class ProductoRepository {
 
         listaProductos.set(idPosicion, producto1);
         return producto1;
+    }
+
+    public Producto buscarPorNombre2(String nombre) {
+        for (Producto producto : listaProductos) {
+            if (producto.getNombre().contains(nombre)) {
+                return producto;
+            }
+        }
+        return null;
     }
 }   

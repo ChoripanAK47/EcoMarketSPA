@@ -1,12 +1,12 @@
-package com.ecomarket.spa.EcoMarketSPA.Service;
+package com.ecomarket.spa.EcoMarketSPA.Producto.Service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ecomarket.spa.EcoMarketSPA.Model.Producto;
-import com.ecomarket.spa.EcoMarketSPA.Repository.ProductoRepository;
+import com.ecomarket.spa.EcoMarketSPA.Producto.Model.Producto;
+import com.ecomarket.spa.EcoMarketSPA.Producto.Repository.ProductoRepository;
 
 @Service
 public class ProductoService {
@@ -26,7 +26,7 @@ public class ProductoService {
     }
 
     public Producto getProducto(String nombre) {
-        return productoRepository.buscarPorNombre(nombre);
+        return productoRepository.buscarPorNombre2(nombre);
     }
 
     public Producto updateProducto(Producto producto) {

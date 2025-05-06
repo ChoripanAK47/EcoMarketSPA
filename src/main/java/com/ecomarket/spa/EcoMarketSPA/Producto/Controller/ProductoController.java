@@ -1,4 +1,4 @@
-package com.ecomarket.spa.EcoMarketSPA.Controller;
+package com.ecomarket.spa.EcoMarketSPA.Producto.Controller;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ecomarket.spa.EcoMarketSPA.Model.Producto;
-import com.ecomarket.spa.EcoMarketSPA.Service.ProductoService;
+import com.ecomarket.spa.EcoMarketSPA.Producto.Model.Producto;
+import com.ecomarket.spa.EcoMarketSPA.Producto.Service.ProductoService;
 
 @RestController
 @RequestMapping("/api/v1/productos")
@@ -32,12 +32,12 @@ public class ProductoController {
         return productoService.saveProducto(producto);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/id/{id}")
     public Producto buscarProducto(@PathVariable int id) {
         return productoService.getProductoID(id);
     }
 
-    @GetMapping("{nombre}")
+    @GetMapping("/nombre/{nombre}")
     public Producto buscarProducto(@PathVariable String nombre) {
         return productoService.getProducto(nombre);
     }
