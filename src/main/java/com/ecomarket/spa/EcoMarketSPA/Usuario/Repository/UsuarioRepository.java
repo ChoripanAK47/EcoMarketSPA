@@ -21,7 +21,7 @@ public class UsuarioRepository {
     public Usuario buscarPorID(int id) {
         for (Usuario usuario : listaUsuarios) {
             if (usuario.getId() == id) {
-                return usuario;
+                return usuario;  
             }
         }
         return null;

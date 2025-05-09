@@ -1,12 +1,7 @@
 package com.ecomarket.spa.EcoMarketSPA.Usuario.Model;
 
 import lombok.Data;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -42,6 +37,5 @@ public class Usuario {
     private String ciudad;
     @Column(nullable = false)
     private String codigoPostal;
-    @Column(nullable = false)
     private boolean admin; // true si es administrador, false si es cliente
 }
