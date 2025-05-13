@@ -8,41 +8,26 @@ import org.springframework.stereotype.Service;
 import com.ecomarket.spa.EcoMarketSPA.Usuario.Model.Usuario;
 import com.ecomarket.spa.EcoMarketSPA.Usuario.Repository.UsuarioRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class UsuarioService {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
-    public List<Usuario> getUsuarios() {
-        return usuarioRepository.obtenerUsuarios();
+    
+    public List<Usuario> obtenerUsuarios() {
+        return usuarioRepository.findAll();
     }
-    public Usuario saveUsuario(Usuario usuario) {
-        return usuarioRepository.guardar(usuario);
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id).get();
     }
-    public Usuario getUsuarioID(int id) {
-        return usuarioRepository.buscarPorID(id);
+    public void eliminarUsuario(Long id) {
+        usuarioRepository.deleteById(id);
     }
-    public Usuario getUsuario(String nombre) {
-        return usuarioRepository.buscarPorNombre(nombre);
+    public void guardarUsuario(Usuario usuario) {
+        usuarioRepository.save(usuario);
     }
-    public Usuario updateUsuario(Usuario usuario) {
-        return usuarioRepository.actualizar(usuario);
-    }
-    public String deleteUsuario(int id) {
-        usuarioRepository.eliminar(id);
-        return "Usuario Eliminado";
-    }
-    public int totalUsuarios() {
-        return usuarioRepository.totalUsuarios();
-    }
-    public Usuario getUsuarioEmail(String email) {
-        return usuarioRepository.buscarPorEmail(email);
-    }
-    public boolean existeUsuario(String email) {
-        for (Usuario usuario : usuarioRepository.obtenerUsuarios()) {
-            if (usuario.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 }

@@ -20,7 +20,7 @@ public class Usuario {
     @Column(nullable = false)
     private String nombre;
     @Column(nullable = false)
-    private String apellido;
+    private String apellidos;
     @Column(unique = true, length = 13, nullable = false)
     private String rut;
     @Column(nullable = false)
