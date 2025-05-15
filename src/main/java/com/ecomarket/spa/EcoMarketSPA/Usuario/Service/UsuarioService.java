@@ -17,17 +17,23 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
     
-    public List<Usuario> obtenerUsuarios() {
+    public List<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
-    public Usuario obtenerUsuarioPorId(Long id) {
+    public Usuario findById(long id) {
         return usuarioRepository.findById(id).get();
     }
-    public void eliminarUsuario(Long id) {
+    public Usuario findByRut(String rut) {
+        return usuarioRepository.findByRut(rut);
+    }
+    public Usuario findByTelefono(String telefono) {
+        return usuarioRepository.findByTelefono(telefono);
+    }
+    public void delete(Long id) {
         usuarioRepository.deleteById(id);
     }
-    public void guardarUsuario(Usuario usuario) {
-        usuarioRepository.save(usuario);
+    public Usuario save(Usuario usuario) {
+       return usuarioRepository.save(usuario);
     }
     
 }

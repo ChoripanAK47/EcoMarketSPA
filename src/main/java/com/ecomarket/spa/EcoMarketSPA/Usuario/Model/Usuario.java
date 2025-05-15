@@ -25,9 +25,7 @@ public class Usuario {
     private String rut;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String telefono;
     @Column(nullable = false)
     private String direccion;
@@ -37,5 +35,4 @@ public class Usuario {
     private String ciudad;
     @Column(nullable = false)
     private String codigoPostal;
-    private boolean admin; // true si es administrador, false si es cliente
 }
