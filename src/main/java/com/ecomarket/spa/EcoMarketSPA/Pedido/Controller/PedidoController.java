@@ -1,14 +1,16 @@
 package com.ecomarket.spa.EcoMarketSPA.Pedido.Controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.ecomarket.spa.EcoMarketSPA.Pedido.Model.Pedido;
 import com.ecomarket.spa.EcoMarketSPA.Pedido.Service.PedidoService;
 
-@RestController
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController 
 @RequestMapping("/api/v1/pedidos")
 public class PedidoController {
 
@@ -16,32 +18,59 @@ public class PedidoController {
     private PedidoService pedidoService;
 
     @GetMapping
-    public List<Pedido> listarPedidos() {
-        return pedidoService.getPedidos();
+    public ResponseEntity<List<Pedido>> listar() {
+        List<Pedido> pedidos  = pedidoService.findAll();
+        if (pedidos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+            //alternativa 2 -> return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(pedidos);
+        //alternativa 2 -> return new ResponseEntity<>(pedidos, HttpStatus.OK);
     }
 
     @PostMapping
-    public Pedido agregarPedido(@RequestBody Pedido pedido) {
-        return pedidoService.savePedido(pedido);
+    public ResponseEntity<Pedido> guardar(@RequestBody Pedido pedido) {
+        Pedido pedidoNuevo = pedidoService.save(pedido);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoNuevo);
+    //    return new ResponseEntity<>(pedidoNuevo, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/id/{id}")
-    public Pedido buscarPedido(@PathVariable int id) {
-        return pedidoService.getPedidoByID(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Pedido> buscar(@PathVariable Integer id) {
+        try {
+            Pedido pedido = pedidoService.findById(id);
+            return ResponseEntity.ok(pedido);
+        } catch ( Exception e ) {
+            return  ResponseEntity.notFound().build();
+        }
     }
 
-    @PutMapping("{id}")
-    public Pedido actualizarPedido(@PathVariable int id, @RequestBody Pedido pedido) {
-        return pedidoService.updatePedido(pedido);
+    @PutMapping("/{id}")
+    public ResponseEntity<Pedido> actualizar(@PathVariable Integer id, @RequestBody Pedido pedido) {
+        try {
+            Pedido ped = pedidoService.findById(id);
+            ped.setId(id);
+            ped.setNombreCliente(pedido.getNombreCliente());
+            ped.setDireccionEnvio(pedido.getDireccionEnvio());
+            ped.setMetodopago(pedido.getMetodopago());
+            ped.setTotal(pedido.getTotal());
+            ped.setEstado(pedido.getEstado());
+            ped.setFechaPedido(pedido.getFechaPedido());
+
+            pedidoService.save(ped);
+            return ResponseEntity.ok(pedido);
+        } catch ( Exception e ) {
+            return  ResponseEntity.notFound().build();
+        }
     }
 
-    @DeleteMapping("{id}")
-    public String eliminarPedido(@PathVariable int id) {
-        return pedidoService.deletePedido(id);
-    }
-
-    @GetMapping("/total")
-    public int totalPedidos() {
-        return pedidoService.totalPedidos();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+        try {
+            pedidoService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch ( Exception e ) {
+            return  ResponseEntity.notFound().build();
+        }
     }
 }

@@ -1,41 +1,34 @@
 package com.ecomarket.spa.EcoMarketSPA.Pedido.Service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.ecomarket.spa.EcoMarketSPA.Pedido.Model.Pedido;
 import com.ecomarket.spa.EcoMarketSPA.Pedido.Repository.PedidoRepository;
 
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
+@Transactional
 public class PedidoService {
 
     @Autowired
-    private PedidoRepository pedidoRepository;
+    private PedidoRepository PedidoRepository;
 
-    public List<Pedido> getPedidos() {
-        return pedidoRepository.obtenerlistaPedidos();
+    public List<Pedido> findAll() {
+        return PedidoRepository.findAll();
     }
 
-    public Pedido savePedido(Pedido pedido) {
-        return pedidoRepository.guardar(pedido);
+    public Pedido findById(long id) {
+        return PedidoRepository.findById(id).get();
     }
 
-    public Pedido getPedidoByID(int id) {
-        return pedidoRepository.buscarPorID(id);
+    public Pedido save(Pedido pedido) {
+        return PedidoRepository.save(pedido);
     }
 
-    public Pedido updatePedido(Pedido pedido) {
-        return pedidoRepository.actualizar(pedido);
-    }
-
-    public String deletePedido(int id) {
-        pedidoRepository.eliminar(id);
-        return "Pedido eliminado";
-    }
-
-    public int totalPedidos() {
-        return pedidoRepository.totallistaPedidos();
+    public void delete(Long id) {
+        PedidoRepository.deleteById(id);
     }
 }

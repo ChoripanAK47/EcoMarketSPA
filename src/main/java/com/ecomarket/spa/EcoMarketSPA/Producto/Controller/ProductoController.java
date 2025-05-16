@@ -1,21 +1,16 @@
 package com.ecomarket.spa.EcoMarketSPA.Producto.Controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.ecomarket.spa.EcoMarketSPA.Producto.Model.Producto;
 import com.ecomarket.spa.EcoMarketSPA.Producto.Service.ProductoService;
 
-@RestController
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController 
 @RequestMapping("/api/v1/productos")
 public class ProductoController {
 
@@ -23,38 +18,60 @@ public class ProductoController {
     private ProductoService productoService;
 
     @GetMapping
-    public List<Producto> listarProductos() {
-        return productoService.getProductos();
+    public ResponseEntity<List<Producto>> listar() {
+        List<Producto> productos  = productoService.findAll();
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+            //alternativa 2 -> return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(productos);
+        //alternativa 2 -> return new ResponseEntity<>(productos, HttpStatus.OK);
     }
 
     @PostMapping
-    public Producto agregarProducto(@RequestBody Producto producto) {
-        return productoService.saveProducto(producto);
+    public ResponseEntity<Producto> guardar(@RequestBody Producto producto) {
+        Producto productoNuevo = productoService.save(producto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoNuevo);
+    //    return new ResponseEntity<>(productoNuevo, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/id/{id}")
-    public Producto buscarProducto(@PathVariable int id) {
-        return productoService.getProductoID(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Producto> buscar(@PathVariable Integer id) {
+        try {
+            Producto producto = productoService.findById(id);
+            return ResponseEntity.ok(producto);
+        } catch ( Exception e ) {
+            return  ResponseEntity.notFound().build();
+        }
     }
 
-    @GetMapping("/nombre/{nombre}")
-    public Producto buscarProducto(@PathVariable String nombre) {
-        return productoService.getProducto(nombre);
+    @PutMapping("/{id}")
+    public ResponseEntity<Producto> actualizar(@PathVariable Integer id, @RequestBody Producto producto) {
+        try {
+            Producto prod = productoService.findById(id);
+            prod.setId(id);
+            prod.setNombre(producto.getNombre());
+            prod.setMarca(producto.getMarca());
+            prod.setDescripcion(producto.getDescripcion());
+            prod.setCategoria(producto.getCategoria());
+            prod.setPrecio(producto.getPrecio());
+            prod.setStock(producto.getStock());
+            prod.setImagenUrl(producto.getImagenUrl());
+
+            productoService.save(prod);
+            return ResponseEntity.ok(producto);
+        } catch ( Exception e ) {
+            return  ResponseEntity.notFound().build();
+        }
     }
 
-    @PutMapping("{id}")
-    public Producto actualizarProducto(@PathVariable int id, @RequestBody Producto producto){
-        return productoService.updateProducto(producto);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+        try {
+            productoService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch ( Exception e ) {
+            return  ResponseEntity.notFound().build();
+        }
     }
-
-    @DeleteMapping("{id}")
-    public String eliminarProducto(@PathVariable int id) {
-        return productoService.deleteProducto(id);
-    }
-
-    @GetMapping("/total")
-    public int totalProductos1() {
-        return productoService.totalProductos1();
-    }
-    
 }
