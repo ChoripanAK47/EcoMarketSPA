@@ -30,4 +30,33 @@ public class ProductoService {
     public void delete(Long id) {
         ProductoRepository.deleteById(id);
     }
+
+    public List<Producto> findByNombre(String nombre) {
+        return ProductoRepository.findByNombre(nombre);
+    }
+
+    public List<Producto> findByMarca(String marca) {
+        return ProductoRepository.findByMarca(marca);
+    }
+
+    public List<Producto> findByCategoria(String categoria) {
+        return ProductoRepository.findByCategoria(categoria);
+    }
+
+    public List<Producto> findByPrecioMenorQue(Double precio) {
+        return ProductoRepository.findByPrecioMenorQue(precio);
+    }
+
+    public List<Producto> findByPrecioMayorQue(Double precio) {
+        return ProductoRepository.findByPrecioMayorQue(precio);
+    }
+
+    public List<Producto> findByStockMenorQue(Integer stock) {
+        return ProductoRepository.findByStockMenorQue(stock);
+    }
+
+    public List<Producto> findByStockMayorQue(Integer stock) {
+        return ProductoRepository.findByStockMayorQue(stock);
+    }
+
 }

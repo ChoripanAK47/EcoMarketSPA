@@ -31,4 +31,12 @@ public class PedidoService {
     public void delete(Long id) {
         PedidoRepository.deleteById(id);
     }
+
+    public List<Pedido> findByClienteId(Long clienteId) {
+        return PedidoRepository.findByClienteId(clienteId);
+    }
+
+    public List<Pedido> findByEstado(String estado) {
+        return PedidoRepository.findByEstado(estado);
+    }       
 }

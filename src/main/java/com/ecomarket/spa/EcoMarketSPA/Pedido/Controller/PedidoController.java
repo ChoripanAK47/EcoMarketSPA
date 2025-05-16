@@ -45,6 +45,24 @@ public class PedidoController {
         }
     }
 
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<List<Pedido>> buscarPorCliente(@PathVariable Long clienteId) {
+        List<Pedido> pedidos = pedidoService.findByClienteId(clienteId);
+        if (pedidos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(pedidos);
+    }
+
+    @GetMapping("/estado/{estado}")
+    public ResponseEntity<List<Pedido>> buscarPorEstado(@PathVariable String estado) {
+        List<Pedido> pedidos = pedidoService.findByEstado(estado);
+        if (pedidos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(pedidos);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Pedido> actualizar(@PathVariable Integer id, @RequestBody Pedido pedido) {
         try {
@@ -63,6 +81,8 @@ public class PedidoController {
             return  ResponseEntity.notFound().build();
         }
     }
+
+        
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {

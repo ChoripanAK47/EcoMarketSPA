@@ -52,25 +52,25 @@ public class DetallePedidoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<DetallePedido> actualizarDetalle(@PathVariable Integer id, @RequestBody DetallePedido detallePedido) {
-        DetallePedido existente = detallePedidoService.findById(id);
-        if (existente == null) {
+        DetallePedido detped = detallePedidoService.findById(id);
+        if (detped == null) {
             return ResponseEntity.notFound().build();
         }
         // Actualiza los campos necesarios
-        existente.setPedidoId(detallePedido.getPedidoId());
-        existente.setProductoId(detallePedido.getProductoId());
-        existente.setCantidad(detallePedido.getCantidad());
-        existente.setPrecioUnitario(detallePedido.getPrecioUnitario());
-        existente.setSubtotal(detallePedido.getSubtotal());
+        detped.setPedidoId(detallePedido.getPedidoId());
+        detped.setProductoId(detallePedido.getProductoId());
+        detped.setCantidad(detallePedido.getCantidad());
+        detped.setPrecioUnitario(detallePedido.getPrecioUnitario());
+        detped.setSubtotal(detallePedido.getSubtotal());
 
-        DetallePedido actualizado = detallePedidoService.save(existente);
+        DetallePedido actualizado = detallePedidoService.save(detped);
         return ResponseEntity.ok(actualizado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarDetalle(@PathVariable Integer id) {
-        DetallePedido existente = detallePedidoService.findById(id);
-        if (existente == null) {
+        DetallePedido detped = detallePedidoService.findById(id);
+        if (detped == null) {
             return ResponseEntity.notFound().build();
         }
         detallePedidoService.delete(id);

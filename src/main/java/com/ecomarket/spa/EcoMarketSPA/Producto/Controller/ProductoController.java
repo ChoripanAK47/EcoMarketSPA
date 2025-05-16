@@ -45,6 +45,69 @@ public class ProductoController {
         }
     }
 
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<List<Producto>> buscarPorNombre(@PathVariable String nombre) {
+        List<Producto> productos = productoService.findByNombre(nombre);
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    @GetMapping("/marca/{marca}")
+    public ResponseEntity<List<Producto>> buscarPorMarca(@PathVariable String marca) {
+        List<Producto> productos = productoService.findByMarca(marca);
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<List<Producto>> buscarPorCategoria(@PathVariable String categoria) {
+        List<Producto> productos = productoService.findByCategoria(categoria);
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    @GetMapping("/precio/menor-que/{precio}")
+    public ResponseEntity<List<Producto>> buscarPorPrecioMenor(@PathVariable Double precio) {
+        List<Producto> productos = productoService.findByPrecioMenorQue(precio);
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    @GetMapping("/precio/mayor-que/{precio}")
+    public ResponseEntity<List<Producto>> buscarPorPrecioMayor(@PathVariable Double precio) {
+        List<Producto> productos = productoService.findByPrecioMayorQue(precio);
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    @GetMapping("/stock/menor-que/{stock}")
+    public ResponseEntity<List<Producto>> buscarPorStockMenor(@PathVariable Integer stock) {
+        List<Producto> productos = productoService.findByStockMenorQue(stock);
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    @GetMapping("/stock/mayor-que/{stock}")
+    public ResponseEntity<List<Producto>> buscarPorStockMayor(@PathVariable Integer stock) {
+        List<Producto> productos = productoService.findByStockMayorQue(stock);
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productos);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Producto> actualizar(@PathVariable Integer id, @RequestBody Producto producto) {
         try {
