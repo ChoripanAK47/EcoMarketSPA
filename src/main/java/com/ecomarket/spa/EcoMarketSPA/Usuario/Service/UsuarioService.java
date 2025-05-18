@@ -26,6 +26,9 @@ public class UsuarioService {
     public Usuario findByRut(String rut) {
         return usuarioRepository.findByRut(rut);
     }
+    public Usuario findByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
     public Usuario findByTelefono(String telefono) {
         return usuarioRepository.findByTelefono(telefono);
     }

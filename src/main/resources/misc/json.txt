@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "nombre": "Tomas",
+        "apellidos": "Olmos Vasquez",
+        "rut": "21076437-2",
+        "email": "to.olmos@duocuc.cl",
+        "telefono": "967250256",
+        "direccion": "Av. Almirante Latorre",
+        "region": "Valparaiso",
+        "ciudad": "La Calera",
+        "codigoPostal": "2290000"
+    },
+    {
+        "id": 2,
+        "nombre": "Vicente",
+        "apellidos": "Nunez Ramirez",
+        "rut": "99999999-9",
+        "email": "vicente.lokura@duocuc.cl",
+        "telefono": "999999999",
+        "direccion": "15 Norte",
+        "region": "Valparaiso",
+        "ciudad": "Vina del Mar",
+        "codigoPostal": "2520000"
+    },
+    {
+        "id": 3,
+        "nombre": "Marcelo",
+        "apellidos": "Conocelo Sentado",
+        "rut": "11273477-5",
+        "email": "ma.conocelo@duocuc.cl",
+        "telefono": "947249345",
+        "direccion": "Avenida Patos de goma",
+        "region": "Valparaiso",
+        "ciudad": "Quilpue",
+        "codigoPostal": "2430000"
+    }
+]

@@ -69,6 +69,16 @@ public class UsuarioController {
 
         }
     }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Usuario> buscarEmail(@PathVariable String email) {
+        try { 
+            Usuario usuario = usuarioService.findByEmail(email);
+            return ResponseEntity.ok(usuario);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+
+        }
+    }
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> actualizar(@PathVariable Integer id, @RequestBody Usuario usuario) {
         try {

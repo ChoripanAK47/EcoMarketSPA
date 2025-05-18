@@ -23,7 +23,7 @@ public class Usuario {
     private String apellidos;
     @Column(unique = true, length = 13, nullable = false)
     private String rut;
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
     @Column(unique = true, nullable = false)
     private String telefono;

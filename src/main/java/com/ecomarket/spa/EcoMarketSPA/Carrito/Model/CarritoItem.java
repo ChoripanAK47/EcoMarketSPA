@@ -1,6 +1,5 @@
 package com.ecomarket.spa.EcoMarketSPA.Carrito.Model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,21 +9,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "Carrito")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Carrito {
+@Entity
+@Table(name = "CarritoItem")
+public class CarritoItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(unique = true, nullable = false)
-    private int usuarioId;
-    @Column(nullable = false)
-    private double total;
-    @Column(nullable = false)
-    private String estado; 
+    private Integer idProducto;
+    private Integer idCarrito;
 }
