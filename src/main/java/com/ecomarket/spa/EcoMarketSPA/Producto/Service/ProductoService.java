@@ -1,45 +1,62 @@
 package com.ecomarket.spa.EcoMarketSPA.Producto.Service;
 
-import java.util.List;
-
+import com.ecomarket.spa.EcoMarketSPA.Producto.Model.Producto;
+import com.ecomarket.spa.EcoMarketSPA.Producto.Repository.ProductoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ecomarket.spa.EcoMarketSPA.Producto.Model.Producto;
-import com.ecomarket.spa.EcoMarketSPA.Producto.Repository.ProductoRepository;
+import java.util.List;
 
 @Service
+@Transactional
 public class ProductoService {
+
     @Autowired
-    private ProductoRepository productoRepository;
+    private ProductoRepository ProductoRepository;
 
-    public List<Producto> getProductos() {
-        return productoRepository.obtenerProductos();
-    }
-
-    public Producto saveProducto(Producto producto) {
-        return productoRepository.guardar(producto);
+    public List<Producto> findAll() {
+        return ProductoRepository.findAll();
     }
 
-    public Producto getProductoID(int id) {
-        return productoRepository.buscarPorID(id);
+    public Producto findById(long id) {
+        return ProductoRepository.findById(id).get();
     }
 
-    public Producto getProducto(String nombre) {
-        return productoRepository.buscarPorNombre2(nombre);
+    public Producto save(Producto producto) {
+        return ProductoRepository.save(producto);
     }
 
-    public Producto updateProducto(Producto producto) {
-        return productoRepository.actualizar(producto);
-    }
-    
-    public String deleteProducto(int id) {
-        productoRepository.eliminar(id);
-        return "Producto Eliminado";
+    public void delete(Long id) {
+        ProductoRepository.deleteById(id);
     }
 
-    public int totalProductos1() {
-        return productoRepository.totalProductos();
+    public List<Producto> findByNombre(String nombre) {
+        return ProductoRepository.findByNombre(nombre);
     }
-    
+
+    public List<Producto> findByMarca(String marca) {
+        return ProductoRepository.findByMarca(marca);
+    }
+
+    public List<Producto> findByCategoria(String categoria) {
+        return ProductoRepository.findByCategoria(categoria);
+    }
+
+    public List<Producto> findByPrecioMenorQue(Double precio) {
+        return ProductoRepository.findByPrecioMenorQue(precio);
+    }
+
+    public List<Producto> findByPrecioMayorQue(Double precio) {
+        return ProductoRepository.findByPrecioMayorQue(precio);
+    }
+
+    public List<Producto> findByStockMenorQue(Integer stock) {
+        return ProductoRepository.findByStockMenorQue(stock);
+    }
+
+    public List<Producto> findByStockMayorQue(Integer stock) {
+        return ProductoRepository.findByStockMayorQue(stock);
+    }
+
 }

@@ -1,11 +1,11 @@
-package com.ecomarket.spa.EcoMarketSPA.Pedido;
+package com.ecomarket.spa.EcoMarketSPA.DetallePedido;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PedidoServiceApplication {
+public class DetallePedidoServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(PedidoServiceApplication.class, args);
+        SpringApplication.run(DetallePedidoServiceApplication.class, args);
     }
 }
